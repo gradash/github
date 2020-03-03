@@ -41,7 +41,7 @@ namespace learning
                     Console.WriteLine("Add more? (Y/N) ");
                     restart = Console.ReadLine().ToUpper();
                 }
-            } while (restart == "Y");                                        //до сих, ниибу как работает
+            } while (restart == "Y");                                        //до сих, пока не разбирался
 
 
 
