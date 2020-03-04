@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,25 +16,31 @@ namespace learning
              static void Main(string[] args)
         {
 
+            // database connect
 
             string connStr = "server=35.233.55.137;user=root;database=learning;password=qwerty_1;";
             MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
 
 
-
+            // YES/NO loop for adding text
             string restart = null;
             do
             {
                 Console.WriteLine("Enter text to database: ");
-                string addstring;
-                addstring = Console.ReadLine();
+                string addstring = Console.ReadLine();
+                
 
-                string query = "INSERT INTO learning (content) VALUES ('" + addstring + "')";
+                // insert to database without injection
+                string query = "INSERT INTO learning (content) VALUES (@content);";
                 MySqlCommand dbInsert = new MySqlCommand(query, conn);
+                dbInsert.Parameters.AddWithValue("@content", addstring);
                 dbInsert.ExecuteNonQuery();
 
-                Console.Write("Add more? (Y/N) ");                          //от сих
+
+
+                // YES/NO loop for adding text
+                Console.Write("Add more? (Y/N) ");                          
                 restart = Console.ReadLine().ToUpper();
                 while ((restart != "Y") && (restart != "N"))   
                 {
@@ -41,9 +48,10 @@ namespace learning
                     Console.WriteLine("Add more? (Y/N) ");
                     restart = Console.ReadLine().ToUpper();
                 }
-            } while (restart == "Y");                                        //до сих, пока не разбирался
+            } while (restart == "Y");                                        
 
 
+            //printing what in database
 
                 Console.WriteLine("------------------");
                 Console.WriteLine("Now in Database: ");
