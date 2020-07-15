@@ -9,7 +9,7 @@ namespace learning
 {
     class dbConnect
     {
-        private readonly string connStr = "server=35.233.55.137;user=root;database=learning;password=qwerty_1;";
+        private readonly string connStr = "server=35.228.129.103;user=root;database=learning;password=qwerty_1;";
 
 
         public void InsertDB(string addstring)
